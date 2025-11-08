@@ -1,5 +1,17 @@
 import json
 
+def initialize_tasks_file():
+    """Create initial tasks.json file with a sample completed task."""
+    initial_task = {
+        "id": 1,
+        "description": "Create tasks.json",
+        "completed": True
+    }
+    
+    with open("tasks.json", "w") as file:
+        json.dump([initial_task], file, indent=4)
+        print("Created tasks.json with initial task")
+
 class Task:
 
     def __init__(self, id, description, completed=False):
@@ -63,7 +75,8 @@ class TaskManager:
                     self._next_id = 1
 
         except FileNotFoundError:
-            self._tasks = []
+            initialize_tasks_file()  # Create file with initial task
+            self.load_tasks()  # Retry loading
 
 
     def save_tasks(self):

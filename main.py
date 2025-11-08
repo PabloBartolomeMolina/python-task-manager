@@ -1,5 +1,6 @@
-from task_manager import TaskManager
+from task_manager import TaskManager, initialize_tasks_file
 from ai_service import create_simple_tasks
+import os
 
 def print_menu(): 
     print("\n--- Gestor de Tareas Inteligente ---")
@@ -58,4 +59,6 @@ def main():
             print("Opción no válida. Selecciona otra.")
 
 if __name__ == "__main__":
+    if not os.path.exists("tasks.json"):
+        initialize_tasks_file()
     main()
