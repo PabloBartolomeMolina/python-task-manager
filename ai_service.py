@@ -25,7 +25,8 @@ Formato de respuesta:
 - etc.
 
 Responde solo con la lista de subtareas, una por línea, empezando cada línea con un guión."""
-        
+        # All parameters are optional except "model" and "messages".
+        # They're available in the documentation: https://platform.openai.com/docs/api-reference/chat/create
         params = {
             "model": "gpt-5",
             "messages": [
@@ -38,9 +39,7 @@ Responde solo con la lista de subtareas, una por línea, empezando cada línea c
         }
 
         response = client.chat.completions.create(**params)
-
         content = response.choices[0].message.content.strip()
-
         subtasks = []
 
         for line in content.split("\n"):
