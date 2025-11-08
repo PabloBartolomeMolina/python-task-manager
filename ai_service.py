@@ -4,6 +4,7 @@ from openai import OpenAI
 
 load_dotenv()
 
+# OPEN_API_KEY is expected to be set in environment variables inside your file .env.
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def create_simple_tasks(description):
