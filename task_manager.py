@@ -64,7 +64,9 @@ class TaskManager:
                 return
         print(f"Tarea no encontrada: #{id}")
 
-    def load_tasks(self):
+    def load_tasks(self, retry_count=0):
+        """Load tasks from JSON file with retry mechanism."""
+        MAX_RETRIES = 3
         try:
             with open(self.FILENAME, "r") as file:
                 data = json.load(file)
@@ -75,8 +77,12 @@ class TaskManager:
                     self._next_id = 1
 
         except FileNotFoundError:
-            initialize_tasks_file()  # Create file with initial task
-            self.load_tasks()  # Retry loading
+            if retry_count >= MAX_RETRIES:
+                print(f"Error: Could not load tasks after {MAX_RETRIES} attempts")
+                return
+            print(f"Retrying... Attempt {retry_count + 1}/{MAX_RETRIES}")
+            initialize_tasks_file()             # Create file with initial task
+            self.load_tasks(retry_count + 1)    # Retry loading
 
 
     def save_tasks(self):
