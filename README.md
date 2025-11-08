@@ -2,13 +2,62 @@
 
 Un gestor de tareas inteligente desarrollado en Python que permite crear, gestionar y completar tareas de forma eficiente. Incluye integración con IA para descomponer tareas complejas en subtareas más simples y accionables.
 
+## 📁 Estructura del proyecto
+```
+TaskManager/
+├── main.py               # Punto de entrada con interfaz de menú y gestión de opciones
+├── task_manager.py       # Lógica principal y operaciones de archivos
+├── ai_service.py         # Integración con OpenAI
+├── test_task_manager.py  # Suite de pruebas unitarias
+├── .env                  # Variables de entorno (no en git)
+├── requirements.txt      # Dependencias del proyecto
+├── tasks.json           # Archivo de datos personal (no en git)
+├── example_tasks.json   # Plantilla de ejemplo
+├── .gitignore          # Configuración de git
+└── README.md            # Documentación del proyecto
+```
+
+### Archivos ignorados
+Los siguientes archivos están excluidos del control de versiones:
+- `tasks.json`: Archivo de datos local
+- `.venv/`: Entorno virtual de Python
+- `__pycache__/`: Archivos compilados de Python
+- `.env`: Variables de entorno
+
+## 💾 Almacenamiento de datos
+
+Las tareas se almacenan localmente en `tasks.json`. Este archivo:
+- Se crea automáticamente en la primera ejecución
+- Contiene tu lista personal de tareas
+- No se incluye en el control de versiones
+- Utiliza esta estructura:
+
+```json
+[
+    {
+        "id": 1,
+        "description": "Create tasks.json",
+        "completed": true
+    }
+]
+```
+
 ## 🚀 Características principales
 
-- **Gestión básica de tareas**: Crear, listar, completar y eliminar tareas
-- **Persistencia de datos**: Las tareas se guardan automáticamente en un archivo JSON
-- **IA integrada**: Usa OpenAI GPT para descomponer tareas complejas en subtareas simples
-- **Interfaz de línea de comandos**: Menú interactivo fácil de usar
-- **Pruebas unitarias**: Suite completa de tests para garantizar la funcionalidad
+- **Gestión de tareas**: Crear, listar, completar y eliminar tareas
+- **Persistencia**: Almacenamiento automático en JSON con mecanismo de reintentos
+- **Manejo de errores**: Operaciones de archivo robustas con reintentos
+- **Interfaz de línea de comandos**: Menú interactivo con validación de entrada
+- **Integración con IA**: Descomposición de tareas usando OpenAI (cuando está configurado)
+- **Sugerencias de tipo**: Mejor claridad y mantenibilidad del código
+
+## 🛡️ Manejo de errores
+
+La aplicación incluye:
+- Mecanismo de reintentos para operaciones de archivo (máximo 3 intentos)
+- Validación de entrada en el menú
+- Gestión segura de IDs de tareas
+- Manejo de salida controlada
 
 ## 🛠️ Tecnologías utilizadas
 
@@ -17,55 +66,6 @@ Un gestor de tareas inteligente desarrollado en Python que permite crear, gestio
 - **JSON**: Almacenamiento de datos
 - **unittest**: Framework de testing
 - **python-dotenv**: Gestión de variables de entorno
-
-## 📁 Estructura del proyecto
-
-```
-TaskManager/
-├── main.py               # Punto de entrada principal con menú interactivo
-├── task_manager.py       # Lógica principal del gestor de tareas
-├── ai_service.py         # Integración con OpenAI para descomponer tareas
-├── test_task_manager.py  # Suite de pruebas unitarias
-├── requirements.txt      # Dependencias del proyecto
-├── tasks.json            # Archivo de persistencia de tareas - personal, to be recreated by the user
-├── example_task.json     # Archivo a usar como template para el task.json del usuario
-└── README.md             # Documentación del proyecto
-```
-
-## 🔧 Instalación y configuración
-
-### Prerrequisitos
-
-- Python 3.13 o superior
-- API Key de OpenAI (opcional, solo para funciones de IA)
-
-### Pasos de instalación
-
-1. **Clona el repositorio**:
-   ```bash
-   git clone https://github.com/PabloBartolomeMolina/python-task-manager.git
-   cd taskmanager
-   ```
-
-2. **Crea un entorno virtual**:
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # En macOS/Linux
-   # o
-   .venv\Scripts\activate     # En Windows
-   ```
-
-3. **Instala las dependencias**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Configura la API de OpenAI** (opcional):
-   - Crea un archivo `.env` en el directorio raíz
-   - Añade tu API key:
-     ```
-     OPENAI_API_KEY=tu-api-key-aquí
-     ```
 
 ## 🎮 Uso del programa
 
@@ -125,20 +125,6 @@ Las pruebas cubren:
 - ✅ Manejo de tareas inexistentes
 - ✅ Listar tareas
 - ✅ Completar tareas
-
-## 📂 Persistencia de datos
-
-Las tareas se almacenan automáticamente en el archivo `tasks.json` con la siguiente estructura:
-
-```json
-[
-    {
-        "id": 1,
-        "description": "Descripción de la tarea",
-        "completed": false
-    }
-]
-```
 
 ## 🤖 Funcionalidad de IA
 
