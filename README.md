@@ -43,7 +43,7 @@ TaskManager/
 
 1. **Clona el repositorio**:
    ```bash
-   git clone https://github.com/mouredev/taskmanager.git
+   git clone https://github.com/PabloBartolomeMolina/python-task-manager.git
    cd taskmanager
    ```
 
@@ -199,16 +199,16 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 ## 👨‍💻 Autor
 
-Desarrollado por [MoureDev](https://github.com/mouredev)
-
+Base desaroollada por [MoureDev](https://github.com/mouredev)
+Mejoras añaadidas por [Pablo](https://github.com/PabloBartolomeMolina)
 ---
 
 ## 📞 Soporte
 
 Si encuentras algún problema o tienes sugerencias:
 
-- Abre un [issue](https://github.com/mouredev/taskmanager/issues)
-- Contacta al desarrollador a través de [Twitter](https://twitter.com/mouredev)
+- Abre un [issue](https://github.com/PabloBartolomeMolina/python-task-manager/issues)
+- Contacta al desarrollador a través de [Linkedin](https://www.linkedin.com/in/pablo-bartolome-molina/)
 
 ---
 
