@@ -22,12 +22,13 @@ Un gestor de tareas inteligente desarrollado en Python que permite crear, gestio
 
 ```
 TaskManager/
-├── main.py                 # Punto de entrada principal con menú interactivo
-├── task_manager.py         # Lógica principal del gestor de tareas
-├── ai_service.py          # Integración con OpenAI para descomponer tareas
-├── test_task_manager.py   # Suite de pruebas unitarias
-├── requirements.txt       # Dependencias del proyecto
-├── tasks.json            # Archivo de persistencia de tareas
+├── main.py               # Punto de entrada principal con menú interactivo
+├── task_manager.py       # Lógica principal del gestor de tareas
+├── ai_service.py         # Integración con OpenAI para descomponer tareas
+├── test_task_manager.py  # Suite de pruebas unitarias
+├── requirements.txt      # Dependencias del proyecto
+├── tasks.json            # Archivo de persistencia de tareas - personal, to be recreated by the user
+├── example_task.json     # Archivo a usar como template para el task.json del usuario
 └── README.md             # Documentación del proyecto
 ```
 
