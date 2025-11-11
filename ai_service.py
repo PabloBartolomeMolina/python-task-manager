@@ -4,33 +4,33 @@ from openai import OpenAI
 
 load_dotenv()
 
-# OPEN_API_KEY is expected to be set in environment variables inside your file .env.
+# OPENAI_API_KEY is expected to be set in environment variables inside your .env file.
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def create_simple_tasks(description):
+    """Use OpenAI to split a complex task into 3-5 simple actionable subtasks."""
 
     if not client.api_key:
-        return ["Error: La API key de OpenAI no está configurada."]
+        return ["Error: OpenAI API key is not configured."]
     
     try:
+        prompt = f"""Break down the following complex task into a list of 3 to 5 simple, actionable subtasks.
 
-        prompt = f"""Desglosa la siguiente tarea compleja en una lista de 3 a 5 subtareas simples y accionables.
+Task: {description}
 
-Tarea: {description}
-
-Formato de respuesta:
-- Subtarea 1
-- Subtarea 2
-- Subtarea 3
+Response format:
+- Subtask 1
+- Subtask 2
+- Subtask 3
 - etc.
 
-Responde solo con la lista de subtareas, una por línea, empezando cada línea con un guión."""
+Reply only with the list of subtasks, one per line, starting each line with a hyphen."""
         # All parameters are optional except "model" and "messages".
-        # They're available in the documentation: https://platform.openai.com/docs/api-reference/chat/create
+        # See the API docs: https://platform.openai.com/docs/api-reference/chat/create
         params = {
             "model": "gpt-5",
             "messages": [
-                {"role": "system", "content": "Eres un asistente experto en gestión de tareas que ayuda a dividir tareas complejas en pasos simples y accionables."},
+                {"role": "system", "content": "You are an expert task management assistant that helps break down complex tasks into simple, actionable steps."},
                 {"role": "user", "content": prompt}
             ],
             "max_completion_tokens": 300,
@@ -49,8 +49,7 @@ Responde solo con la lista de subtareas, una por línea, empezando cada línea c
                 if subtask:
                     subtasks.append(subtask)
 
-        return subtasks if subtasks else ["Error: No se han podido generar las subtareas."]
-
+        return subtasks if subtasks else ["Error: Could not generate subtasks."]
 
     except Exception:
-        return ["Error: No se ha podido realizar la conexión a OpenAI."]
+        return ["Error: Could not connect to OpenAI."]

@@ -38,12 +38,12 @@ class TaskManager:
         task = Task(self._next_id, description, category)
         self._tasks.append(task)
         self._next_id += 1
-        print(f"Tarea añadida: {description}")
+        print(f"Task added: {description}")
         self.save_tasks()
 
     def list_tasks(self):
         if not self._tasks:
-            print("No hay tareas pendientes")
+            print("No pending tasks")
         else:
             for task in self._tasks:
                 print(task)
@@ -52,19 +52,19 @@ class TaskManager:
         for task in self._tasks:
             if task.id == id:
                 task.completed = True
-                print(f"Tarea completada: {task}")
+                print(f"Task completed: {task}")
                 self.save_tasks()
                 return
-        print(f"Tarea no encontrada: #{id}")
+        print(f"Task not found: #{id}")
 
     def delete_task(self, id):
         for task in self._tasks:
             if task.id == id:
                 self._tasks.remove(task)
-                print(f"Tarea eliminada: #{id}")
+                print(f"Task deleted: #{id}")
                 self.save_tasks()
                 return
-        print(f"Tarea no encontrada: #{id}")
+        print(f"Task not found: #{id}")
 
     def load_tasks(self, retry_count=0):
         """Load tasks from JSON file with retry mechanism."""
