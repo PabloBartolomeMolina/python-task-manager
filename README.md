@@ -186,7 +186,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 ## 👨‍💻 Autor
 
 Base desaroollada por [MoureDev](https://github.com/mouredev)
-Mejoras añaadidas por [Pablo](https://github.com/PabloBartolomeMolina)
+Mejoras añadidas por [Pablo](https://github.com/PabloBartolomeMolina)
 ---
 
 ## 📞 Soporte
