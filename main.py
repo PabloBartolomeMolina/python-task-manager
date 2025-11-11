@@ -17,6 +17,9 @@ def handle_choice(choice: int, manager: TaskManager) -> bool:
         match choice:
             case 1:
                 description = input("Descripción de la tarea: ")
+                category = input("Categoría de la tarea (opcional): ")
+                if category.strip() == "":
+                    category = "Default"
                 manager.add_task(description)             
             case 2:
                 description = input("Descripción de la tarea compleja: ")

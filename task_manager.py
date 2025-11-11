@@ -5,6 +5,7 @@ def initialize_tasks_file():
     initial_task = {
         "id": 1,
         "description": "Create tasks.json",
+        "category": "System",
         "completed": True
     }
     
@@ -14,14 +15,15 @@ def initialize_tasks_file():
 
 class Task:
 
-    def __init__(self, id, description, completed=False):
+    def __init__(self, id, description, category = "Default", completed=False):
         self.id = id
         self.description = description
         self.completed = completed
+        self.category = category
 
     def __str__(self):
         status = "✓" if self.completed else " "
-        return f"[{status}] #{self.id}: {self.description}"
+        return f"[{status}] #{self.id} ({self.category}): {self.description}"
     
 class TaskManager:
 
@@ -32,8 +34,8 @@ class TaskManager:
         self._next_id = 1
         self.load_tasks()
 
-    def add_task(self, description):
-        task = Task(self._next_id, description)
+    def add_task(self, description, category="Default"):
+        task = Task(self._next_id, description, category)
         self._tasks.append(task)
         self._next_id += 1
         print(f"Tarea añadida: {description}")
@@ -70,7 +72,15 @@ class TaskManager:
         try:
             with open(self.FILENAME, "r") as file:
                 data = json.load(file)
-                self._tasks = [Task(item["id"], item["description"], item["completed"]) for item in data]
+                # Use get() to provide defaults if keys are missing (backwards compatibility)
+                self._tasks = [
+                    Task(
+                        item.get("id"),
+                        item.get("description", ""),
+                        item.get("category", "Default"),
+                        item.get("completed", False)
+                    ) for item in data
+                ]
                 if self._tasks:
                     self._next_id = self._tasks[-1].id + 1
                 else:
@@ -84,7 +94,13 @@ class TaskManager:
             initialize_tasks_file()             # Create file with initial task
             self.load_tasks(retry_count + 1)    # Retry loading
 
-
     def save_tasks(self):
         with open(self.FILENAME, "w") as file:
-            json.dump([{"id": task.id, "description": task.description, "completed": task.completed} for task in self._tasks], file, indent=4)
+            json.dump([
+                {
+                    "id": task.id,
+                    "description": task.description,
+                    "category": task.category,
+                    "completed": task.completed
+                } for task in self._tasks
+            ], file, indent=4)

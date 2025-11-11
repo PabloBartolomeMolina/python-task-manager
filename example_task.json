@@ -3,6 +3,7 @@
         {
             "id": 1,
             "description": "Example task",
+            "category": "Default",
             "completed": false
         }
     ]

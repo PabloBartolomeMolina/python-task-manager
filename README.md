@@ -172,7 +172,7 @@ Las contribuciones son bienvenidas. Para contribuir:
 ### Próximas características
 
 - [ ] Interfaz gráfica de usuario (GUI)
-- [ ] Categorías de tareas
+- [X] Categorías de tareas
 - [ ] Fechas de vencimiento
 - [ ] Recordatorios
 - [ ] Exportar/importar tareas
