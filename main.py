@@ -1,5 +1,6 @@
 from task_manager import TaskManager, initialize_tasks_file
 from ai_service import create_simple_tasks
+from datetime import datetime
 import os
 
 def print_menu(): 
@@ -11,6 +12,16 @@ def print_menu():
     print("5. Delete task")
     print("6. Exit")
 
+def get_date_input():
+    for _ in range(2):
+        user_input = input("Enter a date (YYYY-MM-DD): ").strip()
+        try:
+            datetime.strptime(user_input, "%Y-%m-%d")
+            return user_input
+        except ValueError:
+            print("Invalid format. Please use YYYY-MM-DD.")
+    return "2020-12-31"
+
 def handle_choice(choice: int, manager: TaskManager) -> bool:
     """Handle menu choice and return False if program should exit."""
     try:
@@ -18,9 +29,10 @@ def handle_choice(choice: int, manager: TaskManager) -> bool:
             case 1:
                 description = input("Task description: ")
                 category = input("Task category (optional): ")
-                if category.strip() == "":
-                    category = "Default"
-                manager.add_task(description, category)             
+                due_date = get_date_input()
+                if due_date.strip() == "":
+                    due_date = "2025-12-31"
+                manager.add_task(description, category, due_date)             
             case 2:
                 description = input("Complex task description: ")
                 subtasks = create_simple_tasks(description)

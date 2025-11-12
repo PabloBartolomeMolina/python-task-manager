@@ -6,6 +6,7 @@ def initialize_tasks_file():
         "id": 1,
         "description": "Create tasks.json",
         "category": "System",
+        "due_date": "2025-12-31",
         "completed": True
     }
     
@@ -15,15 +16,16 @@ def initialize_tasks_file():
 
 class Task:
 
-    def __init__(self, id, description, category = "Default", completed=False):
+    def __init__(self, id, description, category = "Default", due_date = "2025-12-31", completed=False):
         self.id = id
         self.description = description
         self.completed = completed
         self.category = category
+        self.due_date = due_date
 
     def __str__(self):
         status = "✓" if self.completed else " "
-        return f"[{status}] #{self.id} ({self.category}): {self.description}"
+        return f"[{status}] #{self.id} ({self.category}): {self.description} Due by: {self.due_date}"
     
 class TaskManager:
 
@@ -34,8 +36,8 @@ class TaskManager:
         self._next_id = 1
         self.load_tasks()
 
-    def add_task(self, description, category="Default"):
-        task = Task(self._next_id, description, category)
+    def add_task(self, description, category="Default", due_date = "2025-12-31"):
+        task = Task(self._next_id, description, category, due_date)
         self._tasks.append(task)
         self._next_id += 1
         print(f"Task added: {description}")
@@ -78,6 +80,7 @@ class TaskManager:
                         item.get("id"),
                         item.get("description", ""),
                         item.get("category", "Default"),
+                        item.get("due_date", "2025-12-31"),
                         item.get("completed", False)
                     ) for item in data
                 ]
@@ -101,6 +104,7 @@ class TaskManager:
                     "id": task.id,
                     "description": task.description,
                     "category": task.category,
+                    "due_date": task.due_date,
                     "completed": task.completed
                 } for task in self._tasks
             ], file, indent=4)
